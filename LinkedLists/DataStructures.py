@@ -4,7 +4,7 @@ class LinkedList:
         self.tail = None
 
     def __len__(self):
-        count = 1
+        count = 0
         c_node = self.head
         while c_node is not None:
             c_node = c_node.next

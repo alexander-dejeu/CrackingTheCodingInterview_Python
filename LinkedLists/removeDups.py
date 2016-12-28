@@ -30,6 +30,7 @@ same value
 
 from DataStructures import LinkedList, Node
 
+
 def remove_dups(LL):
     seen_data = set()
     if len(LL) < 2:
@@ -47,6 +48,33 @@ def remove_dups(LL):
             seen_data.add(id(p1.data))
     LL.tail = p1
     return LL
+    # BigO: O(n)
+
+def remove_dups_constant_space(LL):
+    # Going to use two pointers to keep space linear but will come at the
+    # cost of speed.
+    if len(LL) < 2:
+        return LL
+    p2 = LL.head
+    p1 = p2.next
+    found_dup = False
+    while p1.next is not None:
+        p2 = LL.head
+        found_dup = False
+        while p2 is not p1:
+            if id(p2.data) == id(p1.data):
+                print("we found the same data")
+                found_dup = True
+                break
+        if not found_dup:
+            print 'no duplicate yet', p1.data, p1.next.data
+            p1 = p1.next
+        else:
+            print 'duplicate ', p1.data, p1.next.data
+            p1 = p1.next
+    LL.tail = p1
+
+
 
 
 node_a = Node('data')
@@ -59,5 +87,7 @@ node_c.next = node_d
 
 linked_list = LinkedList()
 linked_list.head = node_b
-remove_dups(linked_list)
-print node_b.next.data
+remove_dups_constant_space(linked_list)
+print len(linked_list)
+print(linked_list.head.data)
+print(linked_list.head.next.data)
